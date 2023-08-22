@@ -1,0 +1,41 @@
+.addData {
+  display: flex;
+  //   justify-content: center;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  align-items: center;
+  flex-direction: column;
+  height: calc(100vh - 60px);
+
+  overflow-y: scroll;
+
+  .mainTitle {
+    margin-bottom: 35px;
+  }
+
+  form {
+    width: clamp(300px, 65vw, 1600px);
+
+    .technologyHash {
+      margin: 20px 0px 20px 0px;
+      background-color: lightblue;
+      display: inline;
+      padding: 5px;
+      border-radius: 5px;
+    }
+
+    div {
+      margin: 0px 0px 20px 0px;
+    }
+
+    .addBtn {
+      display: flex;
+      align-items: center;
+      margin-top: -30px;
+
+      button {
+        margin-right: 10px;
+      }
+    }
+  }
+}
