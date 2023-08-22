@@ -4,7 +4,7 @@ import useFormDataStore from "../store/formDataStore";
 
 const AddData = () => {
   const { title, setTitle, date, setDate } = useFormDataStore();
-  // console.log(technologies);
+  console.log(import.meta.env.VITE_API_KEY);
   return (
     <main className="addData">
       <h1 className="mainTitle">Add your data to DataBase</h1>
