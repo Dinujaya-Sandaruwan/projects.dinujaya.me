@@ -1,10 +1,16 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import Technologies from "../components/Technologies";
+import useFormDataStore from "../store/formDataStore";
 
 const AddData = () => {
+  const { title, setTitle, date, setDate } = useFormDataStore();
+  // console.log(technologies);
   return (
     <main className="addData">
       <h1 className="mainTitle">Add your data to DataBase</h1>
+      <h2>{title}</h2>
+      <h2>{date}</h2>
+
       <form>
         <div className="mb-3">
           <label htmlFor="proejctTitle" className="form-label">
@@ -15,6 +21,7 @@ const AddData = () => {
             className="form-control"
             id="proejctTitle"
             aria-describedby="title"
+            onChange={(e) => setTitle(e.target.value)}
           />
         </div>
         <div className="mb-3">
@@ -26,6 +33,7 @@ const AddData = () => {
             className="form-control"
             id="date"
             aria-describedby="date"
+            onChange={(e) => setDate(e.target.value)}
           />
         </div>
 

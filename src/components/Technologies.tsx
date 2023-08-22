@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import useFormDataStore from "../store/formDataStore";
 
 const Technologies = () => {
+  const { setTechnologies: setStoreTechnologies } = useFormDataStore();
   const options = [
     { value: "San Francisco" },
     { value: "New York" },
@@ -19,9 +21,13 @@ const Technologies = () => {
     if (value !== "" && !technologies.includes(value))
       setTechnologies([...technologies, value]);
 
-    console.log(technologies);
     setValue("");
   };
+
+  useEffect(() => {
+    setStoreTechnologies(technologies);
+  }, [technologies]);
+
   return (
     <>
       <div>
