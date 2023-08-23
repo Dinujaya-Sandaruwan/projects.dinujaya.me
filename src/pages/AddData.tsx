@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 // import UploadFiles from "../components/UploadFiles";
 
 const AddData = () => {
+  const [isUploading, setIsUploading] = useState(false);
   const navigate = useNavigate();
 
   const {
@@ -45,6 +46,12 @@ const AddData = () => {
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     event?.preventDefault();
+    if (title === "" || date === "" || caption === "" || filePath == "") {
+      alert("Please fill all the fields");
+      return;
+    }
+
+    setIsUploading(true);
     await handleTHubmnailUpload();
     try {
       await addDoc(projectCollectionRef, {
@@ -61,6 +68,7 @@ const AddData = () => {
     }
 
     // window.location.reload();
+    setIsUploading(false);
     navigate("/add/sucess");
   };
 
@@ -78,6 +86,7 @@ const AddData = () => {
             id="proejctTitle"
             aria-describedby="title"
             onChange={(e) => setTitle(e.target.value)}
+            required
           />
         </div>
         <div className="mb-3">
@@ -150,9 +159,10 @@ const AddData = () => {
         <button
           type="submit"
           className="btn btn-primary"
+          disabled={isUploading}
           onClick={(e) => onSubmit(e)}
         >
-          Submit
+          {isUploading ? "Submitting Data..." : "Submit"}
         </button>
       </form>
     </main>
