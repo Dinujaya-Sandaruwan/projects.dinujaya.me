@@ -46,7 +46,7 @@ const AddData = () => {
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     event?.preventDefault();
-    if (title === "" || date === "" || caption === "" || filePath == "") {
+    if (title === "" || date === "" || caption === "") {
       alert("Please fill all the fields");
       return;
     }

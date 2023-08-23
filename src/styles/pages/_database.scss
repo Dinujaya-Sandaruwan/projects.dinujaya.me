@@ -1,0 +1,13 @@
+.container {
+  margin-top: 50px;
+
+  ul {
+    width: 100% !important;
+  }
+
+  .dataList {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}

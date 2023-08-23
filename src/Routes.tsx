@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { AddData, AddSucess, Home } from "./pages";
+import { AddData, AddSucess, Database, Home } from "./pages";
 
 const Router = () => {
   return (
@@ -9,6 +9,7 @@ const Router = () => {
         <Route path="/" element={<Home />} />
         <Route path="/add" element={<AddData />} />
         <Route path="/add/sucess" element={<AddSucess />} />
+        <Route path="/database" element={<Database />} />
       </Routes>
     </>
   );
