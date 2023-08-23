@@ -1,5 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
+import { collection, deleteDoc, doc, onSnapshot } from "firebase/firestore"; // Add onSnapshot import
 import { useEffect, useState } from "react";
 import { db } from "../config/firebase";
 
@@ -13,41 +13,38 @@ interface Project {
   caption: string;
   filePath: string;
 }
-
 const Database = () => {
-  const [projects, setProjects] = useState<Project[]>([{}] as Project[]);
+  const [projects, setProjects] = useState<Project[]>([]); // Initialize state with an empty array
   const projectCollectionRef = collection(db, "projects");
-  const [datalist, setdatalist] = useState([{}] as Project[]);
+  const [loading, setLoading] = useState(true); // Set initial loading state to true
 
   useEffect(() => {
-    const getProjects = async () => {
-      try {
-        const data = await getDocs(projectCollectionRef);
-        const filteredData: Project[] = data.docs.map((doc) => ({
-          id: doc.id,
-          title: doc.data().title,
-          date: doc.data().date,
-          technologies: doc.data().technologies,
-          livePageUrl: doc.data().livePageUrl,
-          sourceCodeUrl: doc.data().sourceCodeUrl,
-          caption: doc.data().caption,
-          filePath: doc.data().filePath,
-        }));
-        setProjects(filteredData);
-        setdatalist(filteredData);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+    const unsubscribe = onSnapshot(projectCollectionRef, (snapshot) => {
+      const updatedProjects: Project[] = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        title: doc.data().title,
+        date: doc.data().date,
+        technologies: doc.data().technologies,
+        livePageUrl: doc.data().livePageUrl,
+        sourceCodeUrl: doc.data().sourceCodeUrl,
+        caption: doc.data().caption,
+        filePath: doc.data().filePath,
+      }));
+      setProjects(updatedProjects);
+      setLoading(false); // Set loading state to false once data is fetched
+    });
 
-    getProjects();
-  }, [datalist]);
+    return () => unsubscribe(); // Unsubscribe from the snapshot listener when component unmounts
+  }, []);
 
   const deleteProject = async (id: string) => {
-    const ProjectDoc = doc(db, "projects", id);
-    await deleteDoc(ProjectDoc);
-    datalist.filter((item) => item.id !== id);
+    const projectDoc = doc(db, "projects", id);
+    await deleteDoc(projectDoc);
   };
+
+  if (loading) {
+    return <h1>Loading</h1>;
+  }
 
   return (
     <div className="container">
