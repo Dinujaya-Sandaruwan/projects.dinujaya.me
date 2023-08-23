@@ -1,0 +1,21 @@
+.addSucess {
+  padding-bottom: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 60px);
+
+  .content {
+    height: 70vh;
+    width: clamp(350px, 70vw, 1800px);
+    background-color: rgba(144, 238, 144, 0.349);
+    border-radius: 20px;
+
+    .sucessTitle {
+      text-align: center;
+      margin-top: 50px;
+      color: rgb(0, 97, 0);
+      font-weight: $bold;
+    }
+  }
+}
