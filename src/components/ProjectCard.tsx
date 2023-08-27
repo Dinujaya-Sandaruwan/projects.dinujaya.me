@@ -2,16 +2,33 @@ import { IconType } from "react-icons";
 import iconList from "../hooks/useIconList";
 
 interface Props {
+  id: string;
   technologies: string[];
+  title: string;
+  date: string;
+  livePageUrl: string;
+  sourceCodeUrl: string;
+  caption: string;
+  filePath: string;
 }
 
-const ProjectCard = ({ technologies }: Props) => {
+const ProjectCard = ({
+  id,
+  technologies,
+  title,
+  date,
+  livePageUrl,
+  sourceCodeUrl,
+  caption,
+  filePath,
+}: Props) => {
   const icons = iconList(technologies);
-  console.log(technologies);
+  console.log("File Path", filePath);
+
   return (
     <article className="projectCard">
-      <img src="" alt="" />
-      <h3>Project Name</h3>
+      <img src={filePath} alt="" />
+      <h3>{title}</h3>
       <p>Project Description</p>
 
       <a href="">

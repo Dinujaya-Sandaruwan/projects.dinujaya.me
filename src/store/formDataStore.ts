@@ -37,10 +37,10 @@ const useFormDataStore = create<FormData>((set) => ({
   setLivePageUrl: (livePageUrl: string) => set({ livePageUrl }),
   sourceCodeUrl: "",
   setSourceCodeUrl: (sourceCodeUrl: string) => set({ sourceCodeUrl }),
-  caption: "",
-  setCaption: (caption: string) => set({ caption }),
   filePath: "",
   setFilePath: (filePath: string) => set({ filePath }),
+  caption: "",
+  setCaption: (caption: string) => set({ caption }),
 }));
 
 export default useFormDataStore;

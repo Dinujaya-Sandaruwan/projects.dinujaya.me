@@ -26,7 +26,6 @@ const AddData = () => {
     setSourceCodeUrl,
     caption,
     setCaption,
-    filePath,
     setFilePath,
   } = useFormDataStore();
 
@@ -37,7 +36,7 @@ const AddData = () => {
     const thumbnailRef = ref(storage, `thumbnails/${uniqueId}.png`);
     const snapShot = await uploadBytes(thumbnailRef, thumbnailUpload);
     const url = await getDownloadURL(snapShot.ref);
-    setFilePath(url);
+    return url;
   };
 
   const projectCollectionRef = collection(db, "projects");
@@ -52,7 +51,11 @@ const AddData = () => {
     }
 
     setIsUploading(true);
-    await handleTHubmnailUpload();
+    const filePath = await handleTHubmnailUpload();
+    console.log(filePath);
+
+    if (filePath == "") alert("Please upload thumbnail");
+    setFilePath(filePath);
     try {
       await addDoc(projectCollectionRef, {
         title,

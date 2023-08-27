@@ -43,7 +43,17 @@ const Home = () => {
   return (
     <div className="home">
       {projects.map((project, index) => (
-        <ProjectCard key={index} technologies={project.technologies} />
+        <ProjectCard
+          key={index}
+          id={project.id}
+          technologies={project.technologies}
+          title={project.title}
+          date={project.date}
+          livePageUrl={project.livePageUrl}
+          sourceCodeUrl={project.sourceCodeUrl}
+          caption={project.caption}
+          filePath={project.filePath}
+        />
       ))}
     </div>
   );
